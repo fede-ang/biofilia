@@ -40,7 +40,8 @@
             fetch(url)
     .then(response => response.json())
     .then(data => {
-        const labels = data.values.map(row => row[0]);  // Etichette delle domande dalla colonna A
+        const maxLength = 15;  // Numero massimo di caratteri
+        const labels = data.values.map(row => row[0].length > maxLength ? row[0].substring(0, maxLength) + '...' : row[0]);  // Etichette delle domande dalla colonna A
         const responses = data.values.map(row => Number(row[1]));  // Risposte del primo utente dalla colonna B
 
         // Crea il grafico
